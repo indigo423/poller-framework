@@ -7,10 +7,10 @@
                       pathOutageEnabled="false">
    <node-outage status="on"
                 pollAllIfNoCriticalServiceDefined="true">
-      <critical-service name="ping.10s"/>
+      <critical-service name="test.ping.10s"/>
    </node-outage>
 
-   <package name="opennms.minion.monitoring">
+   <package name="testsuite.opennms.minion">
       <filter>IPADDR != '0.0.0.0'</filter>
       <include-range begin="1.1.1.1" end="254.254.254.254"/>
       <include-range begin="::1" end="ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"/>
@@ -39,7 +39,7 @@
    </package>
 
    <!-- 10 second polling -->
-   <package name="test.10s.critical.service">
+   <package name="testsuite.10s.critical-service">
       <filter>IPADDR != '0.0.0.0'</filter>
       <include-range begin="0.0.0.0" end="255.255.255.255"/>
       <include-range begin="1.1.1.1" end="254.254.254.254"/>
@@ -51,8 +51,7 @@
          <rra>RRA:MAX:0.5:288:3660</rra>
          <rra>RRA:MIN:0.5:288:3660</rra>
       </rrd>
-      <service name="ping.10s" interval="10000" user-defined="true" status="on">
-         <pattern><![CDATA[^ping\.10s\..*$]]></pattern>
+      <service name="test.ping.10s" interval="10000" user-defined="true" status="on">
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="allow-fragmentation" value="${requisition:allow-fragmentation|true}"/>
@@ -67,7 +66,7 @@
    </package>
 
    <!-- 30 second polling -->
-   <package name="test.30s">
+   <package name="testsuite.30s">
       <filter>IPADDR != '0.0.0.0'</filter>
       <include-range begin="0.0.0.0" end="255.255.255.255"/>
       <include-range begin="1.1.1.1" end="254.254.254.254"/>
@@ -79,8 +78,8 @@
          <rra>RRA:MAX:0.5:288:3660</rra>
          <rra>RRA:MIN:0.5:288:3660</rra>
       </rrd>
-      <service name="snmp.scalar.30s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^snmp\.scalar\.30s\..*$]]></pattern>
+      <service name="test.snmp.scalar.30s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.snmp\.scalar\.30s:.*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="oid" value="${requisition:oid|.1.3.6.1.2.1.1.2.0}"/>
@@ -93,7 +92,7 @@
    </package>
 
    <!-- 60 second polling -->
-   <package name="test.60s">
+   <package name="testsuite.60s">
       <filter>IPADDR != '0.0.0.0'</filter>
       <include-range begin="0.0.0.0" end="255.255.255.255"/>
       <include-range begin="1.1.1.1" end="254.254.254.254"/>
@@ -105,8 +104,8 @@
          <rra>RRA:MAX:0.5:288:3660</rra>
          <rra>RRA:MIN:0.5:288:3660</rra>
       </rrd>
-      <service name="dns.resolve.60s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^dns\.resolve\..$]]></pattern>
+      <service name="test.dns.resolve.60s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.dns\.resolve:.$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|1000}"/>
          <parameter key="port" value="${requisition:port|53}"/>
@@ -115,8 +114,8 @@
          <parameter key="lookup" value="${requisition:lookup}"/>
          <parameter key="nameserver" value="${requisition:nameserver}" />
       </service>
-      <service name="http.60s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^http\.60s\..*$]]></pattern>
+      <service name="test.http.60s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.http\.60s:.*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|3}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="port" value="${requisition:port|443}"/>
@@ -125,8 +124,8 @@
          <parameter key="response" value="${requisition:response|200}" />
          <parameter key="verbose" value="${requisition:verbose|false}"/>
       </service>
-      <service name="https.60s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^https\.60s\..*$]]></pattern>
+      <service name="test.https.60s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.https\.60s:.*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|3}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="port" value="${requisition:port|443}"/>
@@ -135,18 +134,18 @@
          <parameter key="response" value="${requisition:response|200}" />
          <parameter key="verbose" value="${requisition:verbose|false}"/>
       </service>
-      <service name="snmp.scalar.60s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^snmp\.scalar\.60s\..*$]]></pattern>
+      <service name="test.snmp.scalar.60s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.snmp\.scalar\.60s:.*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="oid" value="${requisition:oid|.1.3.6.1.2.1.1.2.0}"/>
       </service>
-      <service name="snmp.prtable.60s" interval="30000" user-defined="true" status="on">
+      <service name="test.snmp.prtable.60s" interval="30000" user-defined="true" status="on">
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
       </service>
-      <service name="ssl.cert.60s" interval="60000" user-defined="true" status="on">
-         <pattern><![CDATA[^ssl\.cert\..$]]></pattern>
+      <service name="test.ssl.cert.60s" interval="60000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.ssl\.cert:.$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="port" value="${requisition:port|443}"/>
@@ -159,7 +158,7 @@
       <downtime begin="432000000" interval="600000"/>
    </package>
 
-   <package name="test.300s">
+   <package name="testsuite.300s">
       <filter>IPADDR != '0.0.0.0'</filter>
       <include-range begin="0.0.0.0" end="255.255.255.255"/>
       <include-range begin="1.1.1.1" end="254.254.254.254"/>
@@ -171,8 +170,8 @@
          <rra>RRA:MAX:0.5:288:3660</rra>
          <rra>RRA:MIN:0.5:288:3660</rra>
       </rrd>
-      <service name="tcp.300s" interval="300000" user-defined="true" status="on">
-         <pattern><![CDATA[^tcp\.300s\..*$]]></pattern>
+      <service name="test.tcp.300s" interval="300000" user-defined="true" status="on">
+         <pattern><![CDATA[^test\.tcp\.300s:.*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="banner" value="${requisition:banner|*}"/>
@@ -187,16 +186,16 @@
    <monitor service="Minion-Heartbeat" class-name="org.opennms.netmgt.poller.monitors.MinionHeartbeatMonitor"/>
    <monitor service="Minion-RPC" class-name="org.opennms.netmgt.poller.monitors.MinionRpcMonitor"/>
 
-   <monitor service="ping.10s" class-name="org.opennms.netmgt.poller.monitors.IcmpMonitor"/>
+   <monitor service="test.ping.10s" class-name="org.opennms.netmgt.poller.monitors.IcmpMonitor"/>
 
-   <monitor service="snmp.scalar.30s" class-name="org.opennms.netmgt.poller.monitors.SnmpMonitor"/>
+   <monitor service="test.snmp.scalar.30s" class-name="org.opennms.netmgt.poller.monitors.SnmpMonitor"/>
 
-   <monitor service="dns.resolve.60s" class-name="org.opennms.netmgt.poller.monitors.DNSResolutionMonitor" />
-   <monitor service="http.60s" class-name="org.opennms.netmgt.poller.monitors.HttpsMonitor"/>
-   <monitor service="https.60s" class-name="org.opennms.netmgt.poller.monitors.HttpsMonitor"/>
-   <monitor service="snmp.scalar.60s" class-name="org.opennms.netmgt.poller.monitors.SnmpMonitor"/>
-   <monitor service="snmp.prtable.60s" class-name="org.opennms.netmgt.poller.monitors.PrTableMonitor"/>
-   <monitor service="ssl.cert.60s" class-name="org.opennms.netmgt.poller.monitors.SSLCertMonitor"/>
+   <monitor service="test.dns.resolve.60s" class-name="org.opennms.netmgt.poller.monitors.DNSResolutionMonitor" />
+   <monitor service="test.http.60s" class-name="org.opennms.netmgt.poller.monitors.HttpsMonitor"/>
+   <monitor service="test.https.60s" class-name="org.opennms.netmgt.poller.monitors.HttpsMonitor"/>
+   <monitor service="test.snmp.scalar.60s" class-name="org.opennms.netmgt.poller.monitors.SnmpMonitor"/>
+   <monitor service="test.snmp.prtable.60s" class-name="org.opennms.netmgt.poller.monitors.PrTableMonitor"/>
+   <monitor service="test.ssl.cert.60s" class-name="org.opennms.netmgt.poller.monitors.SSLCertMonitor"/>
 
-   <monitor service="tcp.300s" class-name="org.opennms.netmgt.poller.monitors.TcpMonitor"/>
+   <monitor service="test.tcp.300s" class-name="org.opennms.netmgt.poller.monitors.TcpMonitor"/>
 </poller-configuration>
