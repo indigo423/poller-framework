@@ -59,8 +59,6 @@
          <parameter key="dscp" value="${requisition:dscp|0}"/>
          <parameter key="packet-size" value="${requisition:packet-size|64}"/>
          <parameter key="thresholding-enabled" value="${requisition:thresholding-enabled|true}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|ping.10s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|ping.10s}"/>
       </service>
       <downtime begin="0" end="300000" interval="10000"/>
       <downtime begin="300000" end="43200000" interval="30000"/>
@@ -87,8 +85,6 @@
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="oid" value="${requisition:oid|.1.3.6.1.2.1.1.2.0}"/>
          <parameter key="hex" value="${requisition:hex|false}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|snmp.scalar.30s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|snmp.scalar.30s}"/>
       </service>
       <downtime begin="0" end="300000" interval="30000"/>
       <downtime begin="300000" end="43200000" interval="60000"/>
@@ -118,8 +114,6 @@
          <parameter key="record-types" value="${requisition:record-type|A}"/>
          <parameter key="lookup" value="${requisition:lookup}"/>
          <parameter key="nameserver" value="${requisition:nameserver}" />
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|dns.resolve.60s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|dns.resolve.60s}"/>
       </service>
       <service name="http.60s" interval="60000" user-defined="true" status="on">
          <pattern><![CDATA[^http\.60s\..*$]]></pattern>
@@ -130,8 +124,6 @@
          <parameter key="url" value="${requisition:path|/}"/>
          <parameter key="response" value="${requisition:response|200}" />
          <parameter key="verbose" value="${requisition:verbose|false}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|http.60s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|http.60s}"/>
       </service>
       <service name="https.60s" interval="60000" user-defined="true" status="on">
          <pattern><![CDATA[^https\.60s\..*$]]></pattern>
@@ -142,16 +134,12 @@
          <parameter key="url" value="${requisition:path|/}"/>
          <parameter key="response" value="${requisition:response|200}" />
          <parameter key="verbose" value="${requisition:verbose|false}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|https.60s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|https.60s}"/>
       </service>
       <service name="snmp.scalar.60s" interval="60000" user-defined="true" status="on">
          <pattern><![CDATA[^snmp\.scalar\.60s\..*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
          <parameter key="oid" value="${requisition:oid|.1.3.6.1.2.1.1.2.0}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|snmp.scalar.60s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|snmp.scalar.60s}"/>
       </service>
       <service name="snmp.prtable.60s" interval="30000" user-defined="true" status="on">
          <parameter key="retry" value="${requisition:retry|2}"/>
@@ -164,8 +152,6 @@
          <parameter key="port" value="${requisition:port|443}"/>
          <parameter key="days" value="${requisition:days|7}"/>
          <parameter key="server-name" value="${requisition:vhost}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|ssl.cert.60s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|ssl.cert.60s}"/>
       </service>
       <downtime begin="0" end="60000" interval="20000"/>
       <downtime begin="300000" end="43200000" interval="60000"/>
@@ -186,11 +172,10 @@
          <rra>RRA:MIN:0.5:288:3660</rra>
       </rrd>
       <service name="tcp.300s" interval="300000" user-defined="true" status="on">
-         <pattern><![CDATA[^sql\.300s\..*$]]></pattern>
+         <pattern><![CDATA[^tcp\.300s\..*$]]></pattern>
          <parameter key="retry" value="${requisition:retry|2}"/>
          <parameter key="timeout" value="${requisition:timeout|3000}"/>
-         <parameter key="rrd-base-name" value="${requisition:rrdBaseName|tcp.300s}"/>
-         <parameter key="ds-name" value="${requisition:rrdBaseName|tcp.300s}"/>
+         <parameter key="banner" value="${requisition:banner|*}"/>
       </service>
       <downtime begin="0" end="300000" interval="30000"/><!-- 30s, 0, 5m -->
       <downtime begin="300000" end="43200000" interval="300000"/><!-- 5m, 5m, 12h -->
@@ -214,5 +199,4 @@
    <monitor service="ssl.cert.60s" class-name="org.opennms.netmgt.poller.monitors.SSLCertMonitor"/>
 
    <monitor service="tcp.300s" class-name="org.opennms.netmgt.poller.monitors.TcpMonitor"/>
-
 </poller-configuration>
